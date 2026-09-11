@@ -12,13 +12,13 @@ public class StringLengthMap2
 {
     public static void main(String[] args)
     {
-        String filename = "src/test1.txt";
+        String filename = "Chapter 15 Activities/FirstLetterMap/FirstLetterMap1/src/test1.txt";
 
         try (Scanner in = new Scanner(new File(filename)))
         {
 
             // Create your map here
-            
+            Map<Integer, Set<String>> words = new HashMap<>();
 
             while (in.hasNext())
             {
@@ -27,13 +27,20 @@ public class StringLengthMap2
 
                 // Update the map here
                 // Use the Java 8 merge() method
-                
+                words.merge(len, new HashSet<>(Arrays.asList(word)), (s1, s2) -> {
+                    s1.addAll(s2);
+                    return s1;
+                });
 
 
             }
 
             // Print the strings, in increasing order of their length
             // Use this format: 1: i, a, i
+            for (Integer len : words.keySet())
+            {
+                System.out.println(len + ": " + words.get(len));
+            }
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
