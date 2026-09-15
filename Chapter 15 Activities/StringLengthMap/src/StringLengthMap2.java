@@ -18,7 +18,7 @@ public class StringLengthMap2
         {
 
             // Create your map here
-            Map<Integer, Set<String>> words = new HashMap<>();
+            Map<Integer, String> words = new HashMap<>();
 
             while (in.hasNext())
             {
@@ -27,17 +27,18 @@ public class StringLengthMap2
 
                 // Update the map here
                 // Use the Java 8 merge() method
-                words.merge(len, new HashSet<>(Arrays.asList(word)), (s1, s2) -> {
-                    s1.addAll(s2);
-                    return s1;
-                });
+                words.merge(len, word, (s1, s2) -> s1 + ", " + s2);
+            
 
 
             }
 
             // Print the strings, in increasing order of their length
             // Use this format: 1: i, a, i
-            for (Integer len : words.keySet())
+            List<Integer> wordList = new ArrayList<>(words.keySet());
+            Collections.sort(wordList);
+
+            for (Integer len : wordList)
             {
                 System.out.println(len + ": " + words.get(len));
             }

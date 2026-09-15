@@ -40,7 +40,9 @@ public class FirstLetterMap
             // a: [a, able, aardvark]
             for (Character c : words.keySet())
             {
-                System.out.println(c + ": " + words.get(c));
+                List<String> wordList = new ArrayList<>(words.get(c));
+                Collections.sort(wordList);
+                System.out.println(c + ": " + wordList);
             }
 
         } catch (FileNotFoundException e)
