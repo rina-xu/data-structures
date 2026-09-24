@@ -12,25 +12,44 @@ public class Grid
     public void floodfill(int row, int column)
     {
         pair = new Pair(row, column);
-        int num = 1;
-        stack.push(pair);
-        while (!stack.isEmpty()) {
-            for (int i = row; i < SIZE - row; i++)
-            {
-                for (int j = column; j < SIZE - column; j++)
-                {
-                    if (pixels[i][j] == 0)
-                    {
-                        pixels[i][j] = num;
-                        pair = new Pair(i, j);
-                        stack.push(pair);
-                    }
-                }
+        //embed in if statement
+        if (pixels[row - 1][column] == 0) {
+            if (row >= 0 && row < SIZE  && column >= 0 && column < SIZE) {
+                stack.push(pair);
+                floodfill(row - 1, column);
             }
         }
-        
+        else if (pixels[row][column + 1] == 0) {
+            if (row >= 0 && row < SIZE  && column >= 0 && column < SIZE) {
+                stack.push(pair);
+                floodfill(row, column + 1);
+            }
+        }
+        else if (pixels[row + 1][column] == 0) {
+            if (row >= 0 && row < SIZE  && column >= 0 && column < SIZE) {
+                stack.push(pair);
+                floodfill(row + 1, column);
+            }
+        }
+        else if (pixels[row][column - 1] == 0) {
+            if (row >= 0 && row < SIZE  && column >= 0 && column < SIZE) {
+                stack.push(pair);
+                floodfill(row, column - 1);
+            }
+        }
+        else {
+            return;
+        }
     }
 
+    public void populate()
+    {
+        System.out.println(stack.size());
+        for (int i = 99; i > 0; i--){
+            Pair p = stack.get(i);
+            pixels[p.getRow()][p.getColumn()] = i;
+        }
+    }
     public String toString()
     {
         String r = "";
