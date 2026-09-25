@@ -29,21 +29,17 @@ public class Grid
                 continue;
 
             pixels[r][c] = nextValue++;
-
-            if (r > 0)
-                stack.push(new Pair(r - 1, c));
-            if (c < SIZE - 1)
-                stack.push(new Pair(r, c + 1));
-            if (r < SIZE - 1)
-                stack.push(new Pair(r + 1, c));
+            
             if (c > 0)
                 stack.push(new Pair(r, c - 1));
+            if (r < SIZE - 1)
+                stack.push(new Pair(r + 1, c));
+            if (c < SIZE - 1)
+                stack.push(new Pair(r, c + 1));
+            if (r > 0)
+                stack.push(new Pair(r - 1, c));
         }
-    }
 
-    public void populate()
-    {
-        // Not needed for this stack-based flood fill.
     }
 
     public String toString()
